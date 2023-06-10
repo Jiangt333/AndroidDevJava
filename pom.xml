@@ -14,9 +14,15 @@
 	<name>Spring_Data_JPA-1</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
-	</properties>
+	<java.version>17</java.version>
+	<alibabaDruidStarter.version>1.2.11</alibabaDruidStarter.version>
+    </properties>
 	<dependencies>
+		<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${alibabaDruidStarter.version}</version>
+        </dependency>
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -66,6 +72,27 @@
 	</dependencies>
 
 	<build>
+		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+    <resources>
+       <resource>
+        <directory>src/main/java</directory>
+        <includes>
+            <include>**/*.yml</include>
+            <include>**/*.properties</include>
+            <include>**/*.xml</include>
+        </includes>
+        <filtering>true</filtering>
+       </resource>
+       <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+            <include>**/*.yml</include>
+            <include>**/*.properties</include>
+            <include>**/*.xml</include>
+        </includes>
+        <filtering>true</filtering>
+       </resource>
+    </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

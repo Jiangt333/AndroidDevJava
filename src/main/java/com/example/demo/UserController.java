@@ -74,7 +74,6 @@ public class UserController {
     @RequestMapping("/register/comfirm")
     public void Register_Confirm(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	Gson gson = new Gson();
-    	//String username = request.getParameter("username");
     	//String account = request.getParameter("account");//是否后台自动生成
     	String password = request.getParameter("password");
     	String phonenumber = request.getParameter("phonenumber");
