@@ -8,20 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 @Entity
-@Table(name = "question")
+@Table(name = "myattention")
 @Data
-public class Questionbox {
+public class Attention {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     @Column(name = "Target", nullable = false)
-    private String target;
+    private String target;//被关注的对象
     @Column(name = "Source", nullable = false)
-    private String source;
-    @Column(name = "Question", nullable = false)
-    private String question;
-    @Column(name = "State", nullable = false)
-    private String state;
+    private String source;//关注的对象
 	public String getTarget() {
 		return target;
 	}
@@ -34,18 +30,5 @@ public class Questionbox {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	public String getQuestion() {
-		return question;
-	}
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
 	
 }
-
