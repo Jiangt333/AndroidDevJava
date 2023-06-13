@@ -36,7 +36,7 @@ public class UserController {
     public void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String phone = request.getParameter("phone");
       	User newuser = UserDao.findByphone(phone);
-      	String value = "123";
+      	String value = gson.toJson(newuser);
     	//String value = gson.toJson(newuser);
     	//设置首部参数
     	response.setContentType("application/json;charset=utf-8");
