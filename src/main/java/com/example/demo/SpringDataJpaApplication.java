@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaAuditing
 @EnableAutoConfiguration
 @EnableTransactionManagement
-@ComponentScan("com.example.entity")
+@ComponentScan("com.example.demo.entity")
+@ComponentScan("com.example.demo.service")
 public class SpringDataJpaApplication {
 
     public static void main(String[] args) {
