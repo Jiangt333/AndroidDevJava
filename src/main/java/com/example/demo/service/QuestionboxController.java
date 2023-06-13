@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import java.io.IOException;
 import java.util.Date;
@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.entity.Questionbox;
+import com.example.demo.repository.QuestionboxRepository;
 import com.google.gson.Gson;
 
 import jakarta.servlet.ServletOutputStream;

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import java.io.IOException;
 import java.util.Date;
@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
 import com.google.gson.Gson;
 
 import jakarta.servlet.ServletOutputStream;
@@ -32,9 +34,10 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String name = request.getParameter("user");
-      	User newuser = UserDao.findBylogin(name);
-    	String value = gson.toJson(newuser);
+    	String phone = request.getParameter("phone");
+      	User newuser = UserDao.findByphone(phone);
+      	String value = "123";
+    	//String value = gson.toJson(newuser);
     	//设置首部参数
     	response.setContentType("application/json;charset=utf-8");
     	response.setStatus(200);
@@ -75,11 +78,11 @@ public class UserController {
     public void Register_Confirm(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	Gson gson = new Gson();
     	//String account = request.getParameter("account");//是否后台自动生成
+    	String name = request.getParameter("name");
     	String password = request.getParameter("password");
     	String phonenumber = request.getParameter("phonenumber");
     	User newuser = new User();
-    	newuser.setLogin("user");
-    	newuser.setName("test");
+    	newuser.setName(name);
     	newuser.setPhone(phonenumber);
     	newuser.setRealpassword(password);
     	UserDao.saveAndFlush(newuser);
