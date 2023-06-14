@@ -11,28 +11,41 @@ import lombok.Data;
 @Table(name = "question")
 @Data
 public class Questionbox {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    @Column(name = "Target", nullable = false)
-    private String target;
-    @Column(name = "Source", nullable = false)
-    private String source;
-    @Column(name = "Question", nullable = false)
-    private String question;
-    @Column(name = "State", nullable = false)
-    private String state;
-	public String getTarget() {
-		return target;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int Id;
+
+	@Column(name = "SourcePhone", nullable = false)
+	private String sourcephone;		// 提问的人
+	@Column(name = "TargetPhone", nullable = false)
+	private String targetphone;		// 被问的人
+	@Column(name = "TargetName", nullable = false)
+	private String targetname;
+	@Column(name = "Question", nullable = false)
+	private String question;
+	@Column(name = "Answer", nullable = false)
+	private String answer;
+	@Column(name = "State", nullable = false)
+	private String state;
+	@Column(name = "Time", nullable = false)
+	private String time;
+	public String getSourcePhone() {
+		return sourcephone;
 	}
-	public void setTarget(String target) {
-		this.target = target;
+	public void setSourcePhone(String sourcephone) {
+		this.sourcephone = sourcephone;
 	}
-	public String getSource() {
-		return source;
+	public String getTargetPhone() {
+		return targetphone;
 	}
-	public void setSource(String source) {
-		this.source = source;
+	public void setTargetPhone(String targetphone) {
+		this.targetphone = targetphone;
+	}
+	public String getTargetName() {
+		return targetname;
+	}
+	public void setTargetName(String targetname) {
+		this.targetname = targetname;
 	}
 	public String getQuestion() {
 		return question;
@@ -40,12 +53,23 @@ public class Questionbox {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public String getState() {
 		return state;
 	}
 	public void setState(String state) {
 		this.state = state;
 	}
-	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 }
 

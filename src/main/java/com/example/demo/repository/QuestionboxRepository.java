@@ -11,7 +11,7 @@ import com.example.demo.entity.Questionbox;
 @Repository
 public interface QuestionboxRepository extends JpaRepository<Questionbox, Long>{
 
-	public List<Questionbox> findBytarget(String target);
-	public List<Questionbox> findBysource(String source);
+	public List<Questionbox> findByTargetphoneAndState(String targetphone, String state);
+	public List<Questionbox> findBySourcephoneAndState(String sourcephone, String state);
 }
 
