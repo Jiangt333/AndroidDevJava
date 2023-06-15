@@ -58,9 +58,8 @@ public class UserController {
     	for(int i=0;i<userlist.size();i++)
     	{
     		User user = userlist.get(i);
-    		if(user.getPhone()==phonenumber)
+    		if(user.getPhone().equals(phonenumber))
     			value = "registered";
-    			
     	}
     	//设置首部参数
     	response.setContentType("text/html;charset=utf-8");
@@ -74,7 +73,7 @@ public class UserController {
     	out.close();
     }
     @ResponseBody
-    @RequestMapping("/register/comfirm")
+    @RequestMapping("/register/confirm")
     public void Register_Confirm(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	Gson gson = new Gson();
     	//String account = request.getParameter("account");//是否后台自动生成
