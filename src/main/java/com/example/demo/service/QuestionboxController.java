@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,48 +24,50 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class QuestionboxController {
 	@Autowired
-    private final  QuestionboxRepository BoxDao;
+	private final  QuestionboxRepository BoxDao;
 	private Gson gson = new Gson(); //创建GSON对象
-    public  QuestionboxController(QuestionboxRepository BoxDao) {
-        this.BoxDao = BoxDao;
-    }
-    @ResponseBody
-    @RequestMapping("/getsource")
-    public void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	//获取提问内容
-    	String target = request.getParameter("target");
-    	List<Questionbox> questionlist = BoxDao.findBytarget(target);
-    	String userJson = gson.toJson(questionlist);
-    	//设置首部参数
-    	response.setContentType("application/json;charset=utf-8");
-    	response.setStatus(200);
-    	response.addHeader("Location", "#");
-    	response.addDateHeader("Date", new Date().getTime());	
-    	//将问题列表返回
-    	ServletOutputStream out = response.getOutputStream();
-    	out.write(userJson.getBytes());
-    	out.flush();
-    	out.close();
-    }
-    @ResponseBody
-    @RequestMapping("/gettarget")
-    public void Register_Check(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	//获取我的提问内容
-    	String source = request.getParameter("source");
-    	List<Questionbox> questionlist = BoxDao.findBysource(source);
-    	String userJson = gson.toJson(questionlist);
-    	//设置首部参数
-    	response.setContentType("application/json;charset=utf-8");
-    	response.setStatus(200);
-    	response.addHeader("Location", "#");
-    	response.addDateHeader("Date", new Date().getTime());	
-    	//将问题列表返回
-    	ServletOutputStream out = response.getOutputStream();
-    	out.write(userJson.getBytes());
-    	out.flush();
-    	out.close();
-    }
+	public  QuestionboxController(QuestionboxRepository BoxDao) {
+		this.BoxDao = BoxDao;
+	}
+	@ResponseBody
+	@RequestMapping("/gettarget")
+	public void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 获取被提问的人的内容
+		String targetphone = request.getParameter("phone");
+		String state = request.getParameter("state");
+		List<Questionbox> boxlist = BoxDao.findByTargetphoneAndState(targetphone, state);
+		String userJson = gson.toJson(boxlist);
 
+		// 设置首部参数
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.addHeader("Location", "#");
+		response.addDateHeader("Date", new Date().getTime());
 
+		// 将问题箱数据库内容返回
+		ServletOutputStream out = response.getOutputStream();
+		out.write(userJson.getBytes());
+		out.flush();
+		out.close();
+	}
+	@ResponseBody
+	@RequestMapping("/getsource")
+	public void Register_Check(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 获取提问的人问的内容
+		String sourcephone = request.getParameter("phone");
+		String state = request.getParameter("state");
+		List<Questionbox> boxlist = BoxDao.findBySourcephoneAndState(sourcephone, state);
+		String userJson = gson.toJson(boxlist);
+		// 设置首部参数
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.addHeader("Location", "#");
+		response.addDateHeader("Date", new Date().getTime());
+		// 将问题箱数据库内容返回
+		ServletOutputStream out = response.getOutputStream();
+		out.write(userJson.getBytes());
+		out.flush();
+		out.close();
+	}
 }
 

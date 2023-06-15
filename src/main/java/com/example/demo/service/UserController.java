@@ -69,7 +69,6 @@ public class UserController {
     		User user = userlist.get(i);
     		if(user.getPhone().equals(phonenumber))
     			value = "registered";
-    			
     	}
     	//设置首部参数
     	response.setContentType("text/html;charset=utf-8");
@@ -83,7 +82,7 @@ public class UserController {
     	out.close();
     }
     @ResponseBody
-    @RequestMapping("/register/comfirm")
+    @RequestMapping("/register/confirm")
     public void Register_Confirm(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	//String account = request.getParameter("account");//是否后台自动生成
     	String name = request.getParameter("name");
