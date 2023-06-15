@@ -57,4 +57,42 @@ public class AttentionController {
         out.flush();
         out.close();
     }
+
+    @ResponseBody
+    @RequestMapping("/square/add")
+    public void squareAddAttention(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String ref = "successful";
+        String source = request.getParameter("source");
+        String target = request.getParameter("target");
+        // 根据source值从数据库中获取对应的target列表
+        List<Attention> attentions = attentionRepository.findBysource(source);
+        //判断对方是否注册，即用户表中有无该用户
+
+        // 提取target值列表
+        for (Attention attention : attentions) {
+            if(attention.getTarget().equals(target)){
+                ref = "repeated";
+                break;
+            }
+        }
+        
+        if(ref.equals("successful")){
+            Attention newAtten = new Attention();
+            newAtten.setSource(source);
+            newAtten.setTarget(target);
+            attentionRepository.saveAndFlush(newAtten);
+        }
+
+        // 设置首部参数
+        response.setContentType("application/json;charset=utf-8");
+        response.setStatus(200);
+        response.addHeader("Location", "#");
+        response.addDateHeader("Date", new Date().getTime());
+
+        // 响应输出
+        ServletOutputStream out = response.getOutputStream();
+        out.write(ref.getBytes());
+        out.flush();
+        out.close();
+    }
 }
