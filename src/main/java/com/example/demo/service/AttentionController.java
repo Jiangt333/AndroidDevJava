@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.entity.Attention;
+import com.example.demo.Attention;
 import com.example.demo.repository.AttentionRepository;
 import com.google.gson.Gson;
 

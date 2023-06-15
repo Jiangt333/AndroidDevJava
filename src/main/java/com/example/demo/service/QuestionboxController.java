@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.entity.Questionbox;
+import com.example.demo.Questionbox;
 import com.example.demo.repository.QuestionboxRepository;
 import com.google.gson.Gson;
 
