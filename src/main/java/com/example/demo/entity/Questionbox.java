@@ -27,8 +27,10 @@ public class Questionbox {
 	private String answer;
 	@Column(name = "State", nullable = false)
 	private String state;
-	@Column(name = "Time", nullable = false)
-	private String time;
+	@Column(name = "QuestionTime", nullable = false)
+	private String questiontime;
+	@Column(name = "AnswerTime", nullable = true)
+	private String answertime;
 	public String getSourcePhone() {
 		return sourcephone;
 	}
@@ -65,11 +67,17 @@ public class Questionbox {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getTime() {
-		return time;
+	public String getQuestionTime() {
+		return questiontime;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setQuestionTime(String time) {
+		this.questiontime = time;
+	}
+	public String getAnswerTime() {
+		return answertime;
+	}
+	public void setAnswerTime(String time) {
+		this.answertime = time;
 	}
 }
 

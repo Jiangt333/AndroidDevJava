@@ -50,6 +50,7 @@ public class QuestionboxController {
 		out.flush();
 		out.close();
 	}
+
 	@ResponseBody
 	@RequestMapping("/getsource")
 	public void Register_Check(HttpServletRequest request, HttpServletResponse response) throws IOException {
