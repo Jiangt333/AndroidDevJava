@@ -23,7 +23,7 @@ public class Questionbox {
 	private String targetname;
 	@Column(name = "Question", nullable = false)
 	private String question;
-	@Column(name = "Answer", nullable = false)
+	@Column(name = "Answer", nullable = true)
 	private String answer;
 	@Column(name = "State", nullable = false)
 	private String state;
