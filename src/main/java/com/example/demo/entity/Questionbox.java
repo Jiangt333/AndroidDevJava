@@ -70,14 +70,14 @@ public class Questionbox {
 	public String getQuestionTime() {
 		return questiontime;
 	}
-	public void setQuestionTime(String time) {
-		this.questiontime = time;
+	public void setQuestionTime(String questiontime) {
+		this.questiontime = questiontime;
 	}
 	public String getAnswerTime() {
 		return answertime;
 	}
-	public void setAnswerTime(String time) {
-		this.answertime = time;
+	public void setAnswerTime(String answertime) {
+		this.answertime = answertime;
 	}
 }
 

@@ -85,9 +85,68 @@ public class QuestionboxController {
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
-		// 将问题箱数据库内容返回
+
+		// 返回删除成功信息
 		ServletOutputStream out = response.getOutputStream();
 		out.write(userJson.getBytes());
+		out.flush();
+		out.close();
+	}
+
+	@ResponseBody
+	@RequestMapping("/Answer")
+	public void Answer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 保存回答
+		String idstr = request.getParameter("id");
+		String answer = request.getParameter("answer");
+		String answertime = request.getParameter("answertime");
+		int id = Integer.parseInt(idstr);
+		String state = "1";
+		Questionbox qbox = BoxDao.findById(id);
+		qbox.setAnswer(answer);
+		qbox.setState(state);
+		qbox.setAnswerTime(answertime);
+		BoxDao.saveAndFlush(qbox);
+		String qboxJson = gson.toJson(qbox);
+
+		// 设置首部参数
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.addHeader("Location", "#");
+		response.addDateHeader("Date", new Date().getTime());
+
+		// 返回更新后的对象
+		ServletOutputStream out = response.getOutputStream();
+		out.write(qboxJson.getBytes());
+		out.flush();
+		out.close();
+	}
+
+	@ResponseBody
+	@RequestMapping("/Question")
+	public void Question(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 保存提问
+		String idstr = request.getParameter("id");
+		String question = request.getParameter("question");
+		String questiontime = request.getParameter("questiontime");
+		int id = Integer.parseInt(idstr);
+		String state = "0";
+		Questionbox qbox = BoxDao.findById(id);
+		qbox.setQuestion(question);
+		qbox.setState(state);
+		qbox.setQuestionTime(questiontime);
+		BoxDao.saveAndFlush(qbox);
+		String qboxJson = gson.toJson(qbox);
+
+		// 设置首部参数
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.addHeader("Location", "#");
+		response.addDateHeader("Date", new Date().getTime());
+
+		// 返回更新后的对象
+		ServletOutputStream out = response.getOutputStream();
+		out.write(qboxJson.getBytes());
 		out.flush();
 		out.close();
 	}
