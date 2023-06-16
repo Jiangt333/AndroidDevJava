@@ -158,4 +158,29 @@ public class AttentionController {
         out.flush();
         out.close();
     }
+
+    @ResponseBody
+    @RequestMapping("/square/delete")
+    public void squareDeleteAttention(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String target = request.getParameter("target");
+        String source = request.getParameter("source");
+
+		List<Attention> deleteOp = attentionDao.findBytarget(target);
+
+        for (Attention d : deleteOp) {
+            if(source.equals(d.getSource()))
+            attentionDao.delete(d);
+        }
+
+        // 设置首部参数
+        response.setContentType("application/json;charset=utf-8");
+        response.setStatus(200);
+        response.addHeader("Location", "#");
+        response.addDateHeader("Date", new Date().getTime());
+
+        // 响应输出
+        ServletOutputStream out = response.getOutputStream();
+        out.flush();
+        out.close();
+    }
 }
