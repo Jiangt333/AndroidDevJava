@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.entity.User;
+import com.example.demo.User;
 import com.example.demo.repository.UserRepository;
 import com.google.gson.Gson;
 
@@ -50,8 +50,6 @@ public class UserController {
     	//设置首部参数
     	response.setContentType("application/json;charset=utf-8");
     	response.setStatus(200);
-    	response.addHeader("Location", "#");
-    	response.addDateHeader("Date", new Date().getTime());
     	//响应输出
     	ServletOutputStream out = response.getOutputStream();
     	out.write(value.getBytes());
@@ -92,13 +90,12 @@ public class UserController {
     	newuser.setName(name);
     	newuser.setPhone(phonenumber);
     	newuser.setRealpassword(password);
+    	newuser.setIschanged(0);
     	UserDao.saveAndFlush(newuser);
     	//设置返回客户端的contentType
     	response.setContentType("text/html;charset=utf-8");
     	//设置状态码
     	response.setStatus(200);
-    	response.addHeader("Location", "#");
-    	response.addDateHeader("Date", new Date().getTime());
     	//响应输出
     	ServletOutputStream out = response.getOutputStream();
     	//ServletInputStream inputStream =request.getInputStream();
@@ -107,20 +104,42 @@ public class UserController {
     	out.flush();
     	out.close();
     }
-    @ResponseBody
+    @RequestMapping("/changeName")
+    public void Name_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	//String account = request.getParameter("account");//是否后台自动生成
+    	String name = request.getParameter("name");
+    	String phonenumber = request.getParameter("phonenumber");
+    	User user = UserDao.findByphone(phonenumber);
+    	user.setName(name);
+    	UserDao.saveAndFlush(user);
+    }
+    @RequestMapping("/changePassword")
+    public void Password_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	//String account = request.getParameter("account");//是否后台自动生成
+    	String password = request.getParameter("password");
+    	String phonenumber = request.getParameter("phonenumber");
+    	User user = UserDao.findByphone(phonenumber);
+    	user.setRealpassword(password);
+    	UserDao.saveAndFlush(user);
+    }
     @PostMapping("/upload")
-    public void uploadAudio(@RequestParam("file") MultipartFile file) throws IOException{
+    public void uploadAudio(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException{
         String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
         String fileName = file.getOriginalFilename();
-        String filePath = uploadPath + "weigui.png";
+        String phone = request.getHeader("phone");
+        String filePath = uploadPath + phone+ ".png";
         File dest = new File(filePath);
         file.transferTo(dest);
+        User user = UserDao.findByphone(phone);
+        user.setIschanged(1);
+        UserDao.saveAndFlush(user);
     }
     @ResponseBody
     @PostMapping("/getheader")
     public void uploadAudio(HttpServletRequest request, HttpServletResponse response) throws IOException{
         String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
-        String filePath = uploadPath + "weigui.png";
+        String phone = request.getParameter("phone");
+        String filePath = uploadPath + phone+ ".png";
         BufferedImage bufferedImage = ImageIO.read(new FileInputStream(new File(filePath)));   	
     	ByteArrayOutputStream output = new ByteArrayOutputStream();
     	ImageIO.write(bufferedImage, "png", output);
@@ -128,13 +147,6 @@ public class UserController {
     	response.setContentType("text/html;charset=utf-8");
     	//设置状态码
     	response.setStatus(200);
-    	response.addHeader("Location", "#");
-    	response.addDateHeader("Date", new Date().getTime());
-        /*File dest = new File(filePath);
-        String value = gson.toJson(dest);
-        response.setContentType("application/json;charset=utf-8");
-    	response.setStatus(200);
-    	response.addHeader("Location", "#");*/
     	//响应输出
     	ServletOutputStream out = response.getOutputStream();
     	out.write(output.toByteArray());

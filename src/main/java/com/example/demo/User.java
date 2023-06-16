@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,8 +23,16 @@ public class User {
     private String realpassword;
     @Column(name = "Phone", nullable = false)
     private String phone;
+    @Column(name = "isChanged", nullable = false)
+    private int ischanged;
 	public int getId() {
 		return Id;
+	}
+	public int getIschanged() {
+		return ischanged;
+	}
+	public void setIschanged(int ischanged) {
+		this.ischanged = ischanged;
 	}
 	public void setId(int id) {
 		Id = id;
