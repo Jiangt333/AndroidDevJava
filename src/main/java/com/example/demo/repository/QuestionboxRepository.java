@@ -12,5 +12,6 @@ import com.example.demo.entity.Questionbox;
 public interface QuestionboxRepository extends JpaRepository<Questionbox, Long>{
 	public List<Questionbox> findByTargetphoneAndState(String targetphone, String state);
 	public List<Questionbox> findBySourcephoneAndState(String sourcephone, String state);
+	public void deleteById(int id);
 }
 
