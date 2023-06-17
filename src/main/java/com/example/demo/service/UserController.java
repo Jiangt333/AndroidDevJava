@@ -123,9 +123,8 @@ public class UserController {
     	UserDao.saveAndFlush(user);
     }
     @PostMapping("/upload")
-    public void uploadAudio(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException{
+    public void uploadAudio(HttpServletRequest request,HttpServletResponse response, @RequestParam("file") MultipartFile file) throws IOException{
         String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
-        String fileName = file.getOriginalFilename();
         String phone = request.getHeader("phone");
         String filePath = uploadPath + phone+ ".png";
         File dest = new File(filePath);
