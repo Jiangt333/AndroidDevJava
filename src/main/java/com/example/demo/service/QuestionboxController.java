@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.entity.Attention;
 import com.example.demo.entity.Questionbox;
+import com.example.demo.entity.User;
 import com.example.demo.repository.QuestionboxRepository;
 import com.google.gson.Gson;
 
@@ -123,20 +125,22 @@ public class QuestionboxController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/Question")
-	public void Question(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 保存提问
-		String idstr = request.getParameter("id");
+	@RequestMapping("/AskQuestion")
+	public void AskQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String source = request.getParameter("source");
+		String target = request.getParameter("target");
 		String question = request.getParameter("question");
 		String questiontime = request.getParameter("questiontime");
-		int id = Integer.parseInt(idstr);
+		String targetName = request.getParameter("targetName");
 		String state = "0";
-		Questionbox qbox = BoxDao.findById(id);
-		qbox.setQuestion(question);
-		qbox.setState(state);
-		qbox.setQuestionTime(questiontime);
-		BoxDao.saveAndFlush(qbox);
-		String qboxJson = gson.toJson(qbox);
+		Questionbox newquestion = new Questionbox();
+    	newquestion.setSourcePhone(source);
+		newquestion.setTargetPhone(target);
+		newquestion.setQuestion(question);
+    	newquestion.setQuestionTime(questiontime);
+		newquestion.setState(state);
+		newquestion.setTargetName(targetName);
+		BoxDao.saveAndFlush(newquestion);
 
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
@@ -146,9 +150,9 @@ public class QuestionboxController {
 
 		// 返回更新后的对象
 		ServletOutputStream out = response.getOutputStream();
-		out.write(qboxJson.getBytes());
 		out.flush();
 		out.close();
 	}
+
 }
 
