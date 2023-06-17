@@ -18,6 +18,7 @@ import com.example.demo.repository.AttentionRepository;
 import com.example.demo.repository.UserRepository;
 import com.google.gson.Gson;
 
+import jakarta.security.auth.message.MessagePolicy.Target;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,6 +35,14 @@ public class AttentionController {
 		this.attentionDao = attentionDao;
         this.userDao = userDao;
 	}
+    public class ListofTarget{
+        String TargetName;
+        String Target;
+        public void additem(String TargetName,String Target){
+            this.TargetName = TargetName;
+            this.Target = Target;
+        } 
+    }
     @ResponseBody
     @RequestMapping("/square/myattention")
     public void squareMyAttention(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -43,14 +52,16 @@ public class AttentionController {
         List<Attention> attentions = attentionDao.findBysource(source);
 
         // 提取target值列表
-        List<String> targetNameList = new ArrayList<>();
+        List<ListofTarget> targetList = new ArrayList<>();
         for (Attention attention : attentions) {
-            targetNameList.add(attention.getTargetName());
+            ListofTarget t = new ListofTarget();
+            t.additem(attention.getTargetName(),attention.getTarget());
+            targetList.add(t);
         }
 
         // 转换为JSON字符串
         Gson gson = new Gson();
-        String attenJson = gson.toJson(targetNameList);
+        String attenJson = gson.toJson(targetList);
 
         // 设置首部参数
         response.setContentType("application/json;charset=utf-8");
@@ -74,14 +85,16 @@ public class AttentionController {
         List<Attention> Fans = attentionDao.findBytarget(target);
 
         // 提取target值列表
-        List<String> sourceNameList = new ArrayList<>();
+        List<ListofTarget> sourceList = new ArrayList<>();
         for (Attention fan : Fans) {
-            sourceNameList.add(fan.getSourceName());
+            ListofTarget t = new ListofTarget();
+            t.additem(fan.getSourceName(),fan.getSource());
+            sourceList.add(t);
         }
 
         // 转换为JSON字符串
         Gson gson = new Gson();
-        String fanJson = gson.toJson(sourceNameList);
+        String fanJson = gson.toJson(sourceList);
 
         // 设置首部参数
         response.setContentType("application/json;charset=utf-8");
@@ -142,6 +155,31 @@ public class AttentionController {
         // 响应输出
         ServletOutputStream out = response.getOutputStream();
         out.write(ref.getBytes());
+        out.flush();
+        out.close();
+    }
+
+    @ResponseBody
+    @RequestMapping("/square/delete")
+    public void squareDeleteAttention(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String target = request.getParameter("target");
+        String source = request.getParameter("source");
+
+		List<Attention> deleteOp = attentionDao.findBytarget(target);
+
+        for (Attention d : deleteOp) {
+            if(source.equals(d.getSource()))
+            attentionDao.delete(d);
+        }
+
+        // 设置首部参数
+        response.setContentType("application/json;charset=utf-8");
+        response.setStatus(200);
+        response.addHeader("Location", "#");
+        response.addDateHeader("Date", new Date().getTime());
+
+        // 响应输出
+        ServletOutputStream out = response.getOutputStream();
         out.flush();
         out.close();
     }
