@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.entity.Attention;
 import com.example.demo.entity.Questionbox;
+import com.example.demo.entity.User;
 import com.example.demo.repository.QuestionboxRepository;
 import com.google.gson.Gson;
 
@@ -130,14 +132,13 @@ public class QuestionboxController {
 		String question = request.getParameter("question");
 		String questiontime = request.getParameter("questiontime");
 		int id = Integer.parseInt(idstr);
-		String state = "0";
 		Questionbox qbox = BoxDao.findById(id);
 		qbox.setQuestion(question);
+		String state = "0";
 		qbox.setState(state);
 		qbox.setQuestionTime(questiontime);
 		BoxDao.saveAndFlush(qbox);
 		String qboxJson = gson.toJson(qbox);
-
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
 		response.setStatus(200);
@@ -150,5 +151,36 @@ public class QuestionboxController {
 		out.flush();
 		out.close();
 	}
+	
+	@ResponseBody
+	@RequestMapping("/AskQuestion")
+	public void AskQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String source = request.getParameter("source");
+		String target = request.getParameter("target");
+		String question = request.getParameter("question");
+		String questiontime = request.getParameter("questiontime");
+		String targetName = request.getParameter("targetName");
+		String state = "0";
+		Questionbox newquestion = new Questionbox();
+    	newquestion.setSourcePhone(source);
+		newquestion.setTargetPhone(target);
+		newquestion.setQuestion(question);
+    	newquestion.setQuestionTime(questiontime);
+		newquestion.setState(state);
+		newquestion.setTargetName(targetName);
+		BoxDao.saveAndFlush(newquestion);
+
+		// 设置首部参数
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.addHeader("Location", "#");
+		response.addDateHeader("Date", new Date().getTime());
+
+		// 返回更新后的对象
+		ServletOutputStream out = response.getOutputStream();
+		out.flush();
+		out.close();
+	}
+
 }
 
