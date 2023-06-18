@@ -69,12 +69,6 @@
             <artifactId>druid</artifactId>
             <version>1.2.8</version>
         </dependency><!--$NO-MVN-MAN-VER$-->
-	
-   <dependency>
-     <groupId>commons-io</groupId>
-     <artifactId>commons-io</artifactId>
-     <version>2.6</version>
-   </dependency>
  </dependencies>
 
 	<build>
