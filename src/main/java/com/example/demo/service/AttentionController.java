@@ -1,10 +1,17 @@
 package com.example.demo.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.aspectj.apache.bcel.classfile.SourceFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -38,9 +45,11 @@ public class AttentionController {
     public class ListofTarget{
         String TargetName;
         String Target;
-        public void additem(String TargetName,String Target){
+        byte[] imageBytes;
+        public void additem(String TargetName,String Target,byte[] imageBytes){
             this.TargetName = TargetName;
             this.Target = Target;
+            this.imageBytes = imageBytes;
         } 
     }
     @ResponseBody
@@ -55,7 +64,21 @@ public class AttentionController {
         List<ListofTarget> targetList = new ArrayList<>();
         for (Attention attention : attentions) {
             ListofTarget t = new ListofTarget();
-            t.additem(attention.getTargetName(),attention.getTarget());
+            String uploadPath = "D:\\AndroidMPV\\images\\";
+            String defaultImagePath = "D:\\AndroidMPV\\images\\1.png";
+            String filePath = uploadPath + attention.getTarget() + ".png";
+
+            File imageFile = new File(filePath);
+            if (!imageFile.exists()) {
+                filePath = defaultImagePath;
+            }
+
+            System.out.println(filePath);
+            BufferedImage bufferedImage = ImageIO.read(new FileInputStream(new File(filePath)));
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", output);
+
+            t.additem(attention.getTargetName(),attention.getTarget(),output.toByteArray());
             targetList.add(t);
         }
 
@@ -88,7 +111,19 @@ public class AttentionController {
         List<ListofTarget> sourceList = new ArrayList<>();
         for (Attention fan : Fans) {
             ListofTarget t = new ListofTarget();
-            t.additem(fan.getSourceName(),fan.getSource());
+            String uploadPath = "D:\\AndroidMPV\\images\\";
+            String defaultImagePath = "D:\\AndroidMPV\\images\\1.png";
+            String filePath = uploadPath + fan.getSource() + ".png";
+            
+            File imageFile = new File(filePath);
+            if (!imageFile.exists()) {
+                filePath = defaultImagePath;
+            }
+
+            BufferedImage bufferedImage = ImageIO.read(new FileInputStream(new File(filePath)));
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", output);
+            t.additem(fan.getSourceName(),fan.getSource(),output.toByteArray());
             sourceList.add(t);
         }
 
