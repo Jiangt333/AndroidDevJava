@@ -59,7 +59,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/register/check")
     public void Register_Check(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String value = "not registered";
+    	String value = "notRegistered";
     	String phonenumber = request.getParameter("phonenumber");
     	List<User> userlist = UserDao.findAll();
     	for(int i=0;i<userlist.size();i++)
