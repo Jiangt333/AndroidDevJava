@@ -108,7 +108,7 @@ public class UserController {
     public void Name_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	//String account = request.getParameter("account");//是否后台自动生成
     	String name = request.getParameter("name");
-    	String phonenumber = request.getParameter("phonenumber");
+    	String phonenumber = request.getParameter("phone");
     	User user = UserDao.findByphone(phonenumber);
     	user.setName(name);
     	UserDao.saveAndFlush(user);
@@ -117,7 +117,7 @@ public class UserController {
     public void Password_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	//String account = request.getParameter("account");//是否后台自动生成
     	String password = request.getParameter("password");
-    	String phonenumber = request.getParameter("phonenumber");
+    	String phonenumber = request.getParameter("phone");
     	User user = UserDao.findByphone(phonenumber);
     	user.setRealpassword(password);
     	UserDao.saveAndFlush(user);
