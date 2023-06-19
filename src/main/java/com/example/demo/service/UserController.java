@@ -59,7 +59,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/register/check")
     public void Register_Check(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String value = "not registered";
+    	String value = "notRegistered";
     	String phonenumber = request.getParameter("phonenumber");
     	List<User> userlist = UserDao.findAll();
     	for(int i=0;i<userlist.size();i++)
@@ -124,7 +124,7 @@ public class UserController {
     }
     @PostMapping("/upload")
     public void uploadAudio(HttpServletRequest request,HttpServletResponse response, @RequestParam("file") MultipartFile file) throws IOException{
-        String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
+        String uploadPath = "D:\\AndroidMPV\\images\\";
         String phone = request.getHeader("phone");
         String filePath = uploadPath + phone+ ".png";
         File dest = new File(filePath);
@@ -136,7 +136,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/getheader")
     public void uploadAudio(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
+        String uploadPath = "D:\\AndroidMPV\\images\\";
         String phone = request.getParameter("phone");
         String filePath = uploadPath + phone+ ".png";
         BufferedImage bufferedImage = ImageIO.read(new FileInputStream(new File(filePath)));   	

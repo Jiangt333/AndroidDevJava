@@ -180,5 +180,24 @@ public class QuestionboxController {
 		out.close();
 	}
 
+	@ResponseBody
+	@RequestMapping("/getdetail")
+	public void getDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String idstr = request.getParameter("id");
+		int id = Integer.parseInt(idstr);
+		Questionbox qbox = BoxDao.findById(id);
+		String qboxJson = gson.toJson(qbox);
+		// 设置首部参数
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.addHeader("Location", "#");
+		response.addDateHeader("Date", new Date().getTime());
+
+		// 返回更新后的对象
+		ServletOutputStream out = response.getOutputStream();
+		out.write(qboxJson.getBytes());
+		out.flush();
+		out.close();
+	}
 }
 

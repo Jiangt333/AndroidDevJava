@@ -69,7 +69,7 @@
             <artifactId>druid</artifactId>
             <version>1.2.8</version>
         </dependency><!--$NO-MVN-MAN-VER$-->
-	</dependencies>
+ </dependencies>
 
 	<build>
 		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
