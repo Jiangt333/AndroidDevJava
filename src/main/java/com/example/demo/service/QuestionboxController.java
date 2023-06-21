@@ -31,6 +31,8 @@ public class QuestionboxController {
 	@ResponseBody
 	@RequestMapping("/gettarget")
 	public void GetTarget(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		// 获取被提问的人的内容
 		String targetphone = request.getParameter("phone");
 		String state = request.getParameter("state");
@@ -39,13 +41,14 @@ public class QuestionboxController {
 
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
 
 		// 将问题箱数据库内容返回
 		ServletOutputStream out = response.getOutputStream();
-		out.write(userJson.getBytes());
+		out.write(userJson.getBytes("UTF-8"));
 		out.flush();
 		out.close();
 	}
@@ -53,6 +56,8 @@ public class QuestionboxController {
 	@ResponseBody
 	@RequestMapping("/getsource")
 	public void GetSource(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		// 获取提问的人问的内容
 		String sourcephone = request.getParameter("phone");
 		String state = request.getParameter("state");
@@ -60,12 +65,13 @@ public class QuestionboxController {
 		String userJson = gson.toJson(boxlist);
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
 		// 将问题箱数据库内容返回
 		ServletOutputStream out = response.getOutputStream();
-		out.write(userJson.getBytes());
+		out.write(userJson.getBytes("UTF-8"));
 		out.flush();
 		out.close();
 	}
@@ -95,6 +101,8 @@ public class QuestionboxController {
 	@ResponseBody
 	@RequestMapping("/Answer")
 	public void Answer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		// 保存回答
 		String idstr = request.getParameter("id");
 		String answer = request.getParameter("answer");
@@ -116,7 +124,7 @@ public class QuestionboxController {
 
 		// 返回更新后的对象
 		ServletOutputStream out = response.getOutputStream();
-		out.write(qboxJson.getBytes());
+		out.write(qboxJson.getBytes("UTF-8"));
 		out.flush();
 		out.close();
 	}
@@ -124,6 +132,7 @@ public class QuestionboxController {
 	@ResponseBody
 	@RequestMapping("/Question")
 	public void Question(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
 		// 保存提问
 		String idstr = request.getParameter("id");
 		String question = request.getParameter("question");
@@ -138,13 +147,14 @@ public class QuestionboxController {
 		String qboxJson = gson.toJson(qbox);
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
 
 		// 返回更新后的对象
 		ServletOutputStream out = response.getOutputStream();
-		out.write(qboxJson.getBytes());
+		out.write(qboxJson.getBytes("UTF-8"));
 		out.flush();
 		out.close();
 	}
@@ -152,6 +162,8 @@ public class QuestionboxController {
 	@ResponseBody
 	@RequestMapping("/AskQuestion")
 	public void AskQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		String source = request.getParameter("source");
 		String target = request.getParameter("target");
 		String question = request.getParameter("question");
@@ -169,31 +181,31 @@ public class QuestionboxController {
 
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
 
-		// 返回更新后的对象
-		ServletOutputStream out = response.getOutputStream();
-		out.flush();
-		out.close();
 	}
 
 	@ResponseBody
 	@RequestMapping("/getdetail")
 	public void getDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		String idstr = request.getParameter("id");
 		int id = Integer.parseInt(idstr);
 		Questionbox qbox = BoxDao.findById(id);
 		String qboxJson = gson.toJson(qbox);
 		// 设置首部参数
 		response.setContentType("application/json;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
 		// 返回更新后的对象
 		ServletOutputStream out = response.getOutputStream();
-		out.write(qboxJson.getBytes());
+		out.write(qboxJson.getBytes("UTF-8"));
 		out.flush();
 		out.close();
 	}
