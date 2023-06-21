@@ -43,16 +43,18 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public void Login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
     	String phone = request.getParameter("phone");
       	User newuser = UserDao.findByphone(phone);
       	String value = gson.toJson(newuser);
     	//String value = gson.toJson(newuser);
     	//设置首部参数
     	response.setContentType("application/json;charset=utf-8");
-    	response.setStatus(200);
+    	
+		response.setStatus(200);
     	//响应输出
     	ServletOutputStream out = response.getOutputStream();
-    	out.write(value.getBytes());
+    	out.write(value.getBytes("UTF-8"));
     	out.flush();
     	out.close();
     }
@@ -153,6 +155,4 @@ public class UserController {
     	out.close();
     }
 
-
-	
 }

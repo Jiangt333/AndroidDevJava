@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,6 +56,7 @@ public class AttentionController {
     @ResponseBody
     @RequestMapping("/square/myattention")
     public void squareMyAttention(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
         String source = request.getParameter("myattention");
 
         // 根据source值从数据库中获取对应的target列表
@@ -88,13 +90,14 @@ public class AttentionController {
 
         // 设置首部参数
         response.setContentType("application/json;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(200);
         response.addHeader("Location", "#");
         response.addDateHeader("Date", new Date().getTime());
 
         // 响应输出
-        ServletOutputStream out = response.getOutputStream();
-        out.write(attenJson.getBytes());
+       ServletOutputStream out = response.getOutputStream();
+        out.write(attenJson.getBytes("UTF-8"));
         out.flush();
         out.close();
     }
@@ -102,8 +105,9 @@ public class AttentionController {
     @ResponseBody
     @RequestMapping("/square/myfans")
     public void squareMyFans(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
         String target = request.getParameter("myfans");
-
+        
         // 根据source值从数据库中获取对应的target列表
         List<Attention> Fans = attentionDao.findBytarget(target);
 
@@ -133,13 +137,14 @@ public class AttentionController {
 
         // 设置首部参数
         response.setContentType("application/json;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(200);
         response.addHeader("Location", "#");
         response.addDateHeader("Date", new Date().getTime());
 
         // 响应输出
         ServletOutputStream out = response.getOutputStream();
-        out.write(fanJson.getBytes());
+        out.write(fanJson.getBytes("UTF-8"));
         out.flush();
         out.close();
     }
@@ -147,6 +152,8 @@ public class AttentionController {
     @ResponseBody
     @RequestMapping("/square/add")
     public void squareAddAttention(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String ref = "successful";
         String source = request.getParameter("source");
         String sourceName = request.getParameter("sourceName");
@@ -182,6 +189,8 @@ public class AttentionController {
 
         // 设置首部参数
         response.setContentType("application/json;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+
         response.setStatus(200);
         response.addHeader("Location", "#");
         response.addDateHeader("Date", new Date().getTime());
@@ -189,7 +198,7 @@ public class AttentionController {
         //如果对方未注册，则会导致响应失败，在前端提示用户不存在即可
         // 响应输出
         ServletOutputStream out = response.getOutputStream();
-        out.write(ref.getBytes());
+        out.write(ref.getBytes("UTF-8"));
         out.flush();
         out.close();
     }
