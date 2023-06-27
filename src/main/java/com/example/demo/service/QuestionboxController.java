@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -113,7 +112,7 @@ public class QuestionboxController {
 		Questionbox qbox = BoxDao.findById(id);
 		qbox.setAnswer(answer);
 		qbox.setState(state);
-		qbox.setAnswerTime(answertime);
+		qbox.setAnswertime(answertime);
 		BoxDao.saveAndFlush(qbox);
 		String qboxJson = gson.toJson(qbox);
 
@@ -143,7 +142,7 @@ public class QuestionboxController {
 		qbox.setQuestion(question);
 		String state = "0";
 		qbox.setState(state);
-		qbox.setQuestionTime(questiontime);
+		qbox.setQuestiontime(questiontime);
 		BoxDao.saveAndFlush(qbox);
 		String qboxJson = gson.toJson(qbox);
 		// 设置首部参数
@@ -172,12 +171,12 @@ public class QuestionboxController {
 		String targetName = request.getParameter("targetName");
 		String state = "0";
 		Questionbox newquestion = new Questionbox();
-    	newquestion.setSourcePhone(source);
-		newquestion.setTargetPhone(target);
+    	newquestion.setSourcephone(source);
+		newquestion.setTargetphone(target);
 		newquestion.setQuestion(question);
-    	newquestion.setQuestionTime(questiontime);
+    	newquestion.setQuestiontime(questiontime);
 		newquestion.setState(state);
-		newquestion.setTargetName(targetName);
+		newquestion.setTargetname(targetName);
 		BoxDao.saveAndFlush(newquestion);
 
 		// 设置首部参数
@@ -204,7 +203,6 @@ public class QuestionboxController {
 		response.setStatus(200);
 		response.addHeader("Location", "#");
 		response.addDateHeader("Date", new Date().getTime());
-
 		// 返回更新后的对象
 		ServletOutputStream out = response.getOutputStream();
 		out.write(qboxJson.getBytes("UTF-8"));
