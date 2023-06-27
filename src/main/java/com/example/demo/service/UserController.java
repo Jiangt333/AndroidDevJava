@@ -108,25 +108,30 @@ public class UserController {
     }
     @RequestMapping("/changeName")
     public void Name_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	//String account = request.getParameter("account");//是否后台自动生成
     	String name = request.getParameter("name");
-    	String phonenumber = request.getParameter("phonenumber");
+    	String phonenumber = request.getParameter("phone");
     	User user = UserDao.findByphone(phonenumber);
     	user.setName(name);
     	UserDao.saveAndFlush(user);
     }
     @RequestMapping("/changePassword")
     public void Password_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	//String account = request.getParameter("account");//是否后台自动生成
     	String password = request.getParameter("password");
-    	String phonenumber = request.getParameter("phonenumber");
+    	String phonenumber = request.getParameter("phone");
     	User user = UserDao.findByphone(phonenumber);
     	user.setRealpassword(password);
     	UserDao.saveAndFlush(user);
     }
+    @RequestMapping("/changePhone")
+    public void Phone_Changing(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String phonenumber = request.getParameter("phone");
+    	User user = UserDao.findByphone(phonenumber);
+    	user.setPhone(phonenumber);
+    	UserDao.saveAndFlush(user);
+    }
     @PostMapping("/upload")
     public void uploadAudio(HttpServletRequest request,HttpServletResponse response, @RequestParam("file") MultipartFile file) throws IOException{
-        String uploadPath = "D:\\AndroidMPV\\images\\";
+        String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
         String phone = request.getHeader("phone");
         String filePath = uploadPath + phone+ ".png";
         File dest = new File(filePath);
@@ -138,7 +143,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/getheader")
     public void uploadAudio(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        String uploadPath = "D:\\AndroidMPV\\images\\";
+        String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
         String phone = request.getParameter("phone");
         String filePath = uploadPath + phone+ ".png";
         BufferedImage bufferedImage = ImageIO.read(new FileInputStream(new File(filePath)));   	

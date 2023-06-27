@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import org.aspectj.apache.bcel.classfile.SourceFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,6 @@ import com.example.demo.repository.AttentionRepository;
 import com.example.demo.repository.UserRepository;
 import com.google.gson.Gson;
 
-import jakarta.security.auth.message.MessagePolicy.Target;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -66,8 +64,8 @@ public class AttentionController {
         List<ListofTarget> targetList = new ArrayList<>();
         for (Attention attention : attentions) {
             ListofTarget t = new ListofTarget();
-            String uploadPath = "D:\\AndroidMPV\\images\\";
-            String defaultImagePath = "D:\\AndroidMPV\\images\\1.png";
+            String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
+            String defaultImagePath = "D:\\myproject\\AndroidDevJava\\images\\1.png";
             String filePath = uploadPath + attention.getTarget() + ".png";
 
             File imageFile = new File(filePath);
@@ -115,8 +113,8 @@ public class AttentionController {
         List<ListofTarget> sourceList = new ArrayList<>();
         for (Attention fan : Fans) {
             ListofTarget t = new ListofTarget();
-            String uploadPath = "D:\\AndroidMPV\\images\\";
-            String defaultImagePath = "D:\\AndroidMPV\\images\\1.png";
+            String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
+            String defaultImagePath = "D:\\myproject\\AndroidDevJava\\images\\1.png";
             String filePath = uploadPath + fan.getSource() + ".png";
             
             File imageFile = new File(filePath);

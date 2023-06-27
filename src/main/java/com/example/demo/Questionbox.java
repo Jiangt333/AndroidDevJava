@@ -14,7 +14,6 @@ public class Questionbox {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
-
 	@Column(name = "SourcePhone", nullable = false)
 	private String sourcephone;		// 提问的人
 	@Column(name = "TargetPhone", nullable = false)
@@ -31,22 +30,28 @@ public class Questionbox {
 	private String questiontime;
 	@Column(name = "AnswerTime", nullable = true)
 	private String answertime;
-	public String getSourcePhone() {
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getSourcephone() {
 		return sourcephone;
 	}
-	public void setSourcePhone(String sourcephone) {
+	public void setSourcephone(String sourcephone) {
 		this.sourcephone = sourcephone;
 	}
-	public String getTargetPhone() {
+	public String getTargetphone() {
 		return targetphone;
 	}
-	public void setTargetPhone(String targetphone) {
+	public void setTargetphone(String targetphone) {
 		this.targetphone = targetphone;
 	}
-	public String getTargetName() {
+	public String getTargetname() {
 		return targetname;
 	}
-	public void setTargetName(String targetname) {
+	public void setTargetname(String targetname) {
 		this.targetname = targetname;
 	}
 	public String getQuestion() {
@@ -67,17 +72,19 @@ public class Questionbox {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getQuestionTime() {
+	public String getQuestiontime() {
 		return questiontime;
 	}
-	public void setQuestionTime(String questiontime) {
+	public void setQuestiontime(String questiontime) {
 		this.questiontime = questiontime;
 	}
-	public String getAnswerTime() {
+	public String getAnswertime() {
 		return answertime;
 	}
-	public void setAnswerTime(String answertime) {
+	public void setAnswertime(String answertime) {
 		this.answertime = answertime;
 	}
+
+
 }
 
