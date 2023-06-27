@@ -65,7 +65,7 @@ public class AttentionController {
         for (Attention attention : attentions) {
             ListofTarget t = new ListofTarget();
             String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
-            String defaultImagePath = "D:\\myproject\\AndroidDevJava\\images\\1.png";
+            String defaultImagePath = "D:\\myproject\\AndroidDevJava\\images\\0.png";
             String filePath = uploadPath + attention.getTarget() + ".png";
 
             File imageFile = new File(filePath);
@@ -114,7 +114,7 @@ public class AttentionController {
         for (Attention fan : Fans) {
             ListofTarget t = new ListofTarget();
             String uploadPath = "D:\\myproject\\AndroidDevJava\\images\\";
-            String defaultImagePath = "D:\\myproject\\AndroidDevJava\\images\\1.png";
+            String defaultImagePath = "D:\\myproject\\AndroidDevJava\\images\\0.png";
             String filePath = uploadPath + fan.getSource() + ".png";
             
             File imageFile = new File(filePath);
