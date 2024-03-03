@@ -6,6 +6,7 @@
 
 使用教程：
 1、下载**Android Studio**应用，配置相关**环境**；
+
 2、打开Android Studio，并从GitHub中下载**前端**代码：具体的仓库链接为https://github.com/Jiangt333/AndroidDev；
 3、在common文件中**更新本机的IP地址**（命令行ipconfig获取）；
 4、下载并打开可以运行Java语言的其他IDE（如Vscode、Eclipse等），**配置maven springboot 环境**；
