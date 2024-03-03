@@ -5,14 +5,21 @@
 前端：https://github.com/Jiangt333/AndroidDev
 
 使用教程：
+
 1、下载**Android Studio**应用，配置相关**环境**；
 
 2、打开Android Studio，并从GitHub中下载**前端**代码：具体的仓库链接为https://github.com/Jiangt333/AndroidDev；
+
 3、在common文件中**更新本机的IP地址**（命令行ipconfig获取）；
+
 4、下载并打开可以运行Java语言的其他IDE（如Vscode、Eclipse等），**配置maven springboot 环境**；
+
 5、从GitHub中下载**后端**代码（即本仓库）：具体的仓库链接为（注意与前端链接位置不同）https://github.com/Jiangt333/AndroidDevJava；
+
 6、下载并打开MySQL应用，设置相关信息；
+
 7、在后端代码的**application.properties更新(6中设置的)数据库信息**，如数据库密码等。
+
 8、分别运行前后端代码。
 
 
