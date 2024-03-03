@@ -1,5 +1,4 @@
-# AndroidDevJava
-《基于Android Studio 和 Spring Boot 框架的互动提问箱应用程序开发》
+# 《基于Android Studio 和 Spring Boot 框架的互动提问箱应用程序开发》
 
 此为后端仓库
 前端：https://github.com/Jiangt333/AndroidDev
@@ -28,7 +27,9 @@
 注意事项：
 
 1、由于工信部制定的规则限制，“注册”版块中的短信验证需要跟踪至项目本身，在我们打包的APK中是可以实现的（前提是连接正确的数据库、更新正确的IP，这个功能我们已对老师演示过）。
+
 但如需在新的项目中实现该功能，必须前往MobTech注册账号，获取App Key和App Secret，替换原位置的key和secret（具体位置见项目文档的代码实现的第1部分），并获取新项目MD5签名和包名，添加至MobTech后台（配置文件已经加入项目中，注意进行sync）。
+
 由于本过程繁琐，建议直接在数据库中添加用户信息。
 
 2、后端图片文件存储路径请根据实际情况修改。
